@@ -1,0 +1,13 @@
+{
+  integer num = 8
+  integer factorial = 1
+  integer i = 1
+
+  while logic{i <= num} {
+    factorial = operation{factorial * i}
+    i = 9
+  }
+
+  print factorial
+  print string{how dare you}
+}
