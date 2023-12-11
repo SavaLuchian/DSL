@@ -6,11 +6,6 @@
             print i
             print endline
         }
-        else{
-            print string{}
-            print i
-            print 
-        }
         i=operation{i+1}
     }
 }
