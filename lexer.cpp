@@ -129,6 +129,10 @@ void tokenize(string input)
             {
                 t_list[k].type = "logic";
             }
+            else if (numStr == "endline")
+            {
+                t_list[k].type = "endline";
+            }
             else if (numStr == "string")
             {
                 t_list[k].type = "string";
@@ -191,6 +195,14 @@ void tokenize(string input)
             while (ispunct(input[i]) && input[i] != '{' && input[i] != '}' && input[i] != '(' && input[i] != ')')
             {
                 if (input[i] == '-' && input[i - 1] == '=')
+                    break;
+                if (input[i] == '-' && input[i - 1] == '>')
+                    break;
+                if (input[i] == '-' && input[i - 1] == '<')
+                    break;
+                if (input[i] == '-' && input[i - 1] == '*')
+                    break;
+                if (input[i] == '-' && input[i - 1] == '/')
                     break;
                 numStr += input[i];
                 i++;
