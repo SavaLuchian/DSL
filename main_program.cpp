@@ -2,7 +2,7 @@
 
 int main()
 {
-    bool developer = false;
+    bool developer = true;
     string expression = readFileToString("input.txt");
     tokenize(expression);
     if (developer)

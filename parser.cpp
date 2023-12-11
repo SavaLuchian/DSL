@@ -51,6 +51,57 @@ bool validate(token list[], int n)
                 return false;
             }
         }
+        // ERROR: Operation cant be empty
+        if (list[i].type == "operation")
+        {
+            if (list[i + 1].type == "start" && list[i + 2].type == "end")
+            {
+                cout << endl
+                     << "ERROR: Operation can't be empty";
+                return false;
+            }
+        }
+        // ERROR: Logic cant be empty
+        if (list[i].type == "logic")
+        {
+            if (list[i + 1].type == "start" && list[i + 2].type == "end")
+            {
+                cout << endl
+                     << "ERROR: Logic can't be empty";
+                return false;
+            }
+        }
+        // ERROR: IF missing logic
+        if (list[i].type == "if")
+        {
+            if (list[i + 1].type != "logic")
+            {
+                cout << endl
+                     << "ERROR: IF statement missing logic expression";
+                return false;
+            }
+        }
+        // ERROR: WHILE missing logic
+        if (list[i].type == "while")
+        {
+            if (list[i + 1].type != "logic")
+            {
+                cout << endl
+                     << "ERROR: WHILE statement missing logic expression";
+                return false;
+            }
+        }
+        // ERROR: Print syntax
+        if (list[i].type == "print")
+        {
+            if (list[i + 1].type != "logic" && list[i + 1].type != "operation" && list[i + 1].type != "var" && list[i + 1].type != "integer" && list[i + 1].type != "decimal" && list[i + 1].type != "string" && list[i + 1].type != "endline")
+            {
+                cout << endl
+                     << "ERROR: Print doesn't output anything";
+                return false;
+            }
+        }
+
         //  ERROR: unknown
         if (list[i].type == "unknown")
         {

@@ -88,7 +88,7 @@ bool logic_result(Node *point)
 {
     if (point->right->tkn.type == "integer" || point->right->tkn.type == "decimal" || point->right->tkn.type == "var" || point->right->tkn.type == "operation")
     {
-        if (point->left->tkn.type == "integer" || point->left->tkn.type == "decimal" || point->left->tkn.type == "var" || point->right->tkn.type == "operation")
+        if (point->left->tkn.type == "integer" || point->left->tkn.type == "decimal" || point->left->tkn.type == "var" || point->left->tkn.type == "operation")
         {
             // operation type
             if (point->tkn.type == "less")
@@ -120,8 +120,9 @@ Node *if_while_trav(Node *point)
         while (point->tkn.type != "node")
             point = point->root;
         point = point->right;
-        if (point->left->tkn.type == "else")
-            point->left->tkn.type = "else_act";
+        if (point->left != nullptr)
+            if (point->left->tkn.type == "else")
+                point->left->tkn.type = "else_act";
     }
     return point;
 }
@@ -129,22 +130,24 @@ Node *if_while_trav(Node *point)
 Node *print_trav(Node *point)
 {
     if (point->right->tkn.type == "operation")
-        cout << setprecision(precision) << operation_result(point->right->right) << endl;
+        cout << setprecision(precision) << operation_result(point->right->right);
     else if (point->right->tkn.type == "logic")
     {
         if (logic_result(point->right->right))
-            cout << "True" << endl;
+            cout << "True";
         else
-            cout << "False" << endl;
+            cout << "False";
     }
     else if (point->right->tkn.type == "var")
-        cout << setprecision(precision) << return_value(point->right) << endl;
+        cout << setprecision(precision) << return_value(point->right);
     else if (point->right->tkn.type == "decimal")
-        cout << setprecision(precision) << point->right->tkn.decimal << endl;
+        cout << setprecision(precision) << point->right->tkn.decimal;
     else if (point->right->tkn.type == "integer")
         cout << point->right->tkn.number << endl;
+    else if (point->right->tkn.type == "endline")
+        cout << endl;
     else
-        cout << point->right->right->tkn.name << endl;
+        cout << point->right->right->tkn.name;
     while (point->tkn.type != "node")
         point = point->root;
     point = point->right;
@@ -177,7 +180,7 @@ void traverse_tree(Node *root)
             point = point->root;
             point = point->right;
         }
-        else if (point->tkn.type == "var_int"||point->tkn.type == "var_decimal")
+        else if (point->tkn.type == "var_int" || point->tkn.type == "var_decimal")
         {
             point = point->root;
             point = point->right;
@@ -214,5 +217,3 @@ void traverse_tree(Node *root)
         }
     }
 }
-
-

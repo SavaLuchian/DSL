@@ -1,13 +1,16 @@
 {
-  integer num = 8
-  integer factorial = 1
-  integer i = 1
-
-  while logic{i <= num} {
-    factorial = operation{factorial * i}
-    i = 9
-  }
-
-  print factorial
-  print string{how dare you}
+    integer i=0
+    while logic{i<30}{
+        if logic{operation{i%3}==0}{
+            print string{yep: }
+            print i
+            print endline
+        }
+        else{
+            print string{}
+            print i
+            print 
+        }
+        i=operation{i+1}
+    }
 }
